@@ -97,6 +97,8 @@ class BD:
         return self.cursor.execute(f'''SELECT ID_USER_ORIGEM, ID_USER_DESTINO, CONTEUDO, DATA_ENVIO FROM MENSAGEM_PRIVADA WHERE
                                     ID_USER_ORIGEM = ? OR ID_USER_DESTINO = ?
                                     ORDER BY DATA_ENVIO''', [user_id, user_id]).fetchall()
+    
+        # Implementar logica em python, nao necessariamente BD
 
         #for row in self.select("USUARIO", ["ID_USER"], "ID_USER != ?", [user_id]):
             # retornar todos os id_user (que nao sao o usuario) em cada posicao do vetor conversas 
