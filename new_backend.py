@@ -90,25 +90,26 @@ class BD:
     def create_user(self, nome, email, senha, data):
         status = None
         self.insert("USUARIO", ["NOME", "STATUS", "DATA_NASCIMENTO", "EMAIL", "SENHA"], [nome, status, data, email, senha])
-        
-    def get_conversas(self, user_id):
-        conversas = []
+
+    def get_conversas_sent(self, user_id):
         self.connect()
-        return self.cursor.execute(f'''SELECT ID_USER_ORIGEM, ID_USER_DESTINO, CONTEUDO, DATA_ENVIO FROM MENSAGEM_PRIVADA WHERE
-                                    ID_USER_ORIGEM = ? OR ID_USER_DESTINO = ?
-                                    ORDER BY DATA_ENVIO''', [user_id, user_id]).fetchall()
+        result = self.cursor.execute(f'''SELECT M.ID_USER_ORIGEM, M.ID_USER_DESTINO, U.NOME, M.CONTEUDO, M.DATA_ENVIO
+                                     FROM MENSAGEM_PRIVADA M JOIN USUARIO U ON M.ID_USER_DESTINO = U.ID_USER
+                                     WHERE M.ID_USER_ORIGEM = ?
+                                     ORDER BY M.DATA_ENVIO ASC''', [user_id]).fetchall()
+        return result
     
-        # Implementar logica em python, nao necessariamente BD
-
-        #for row in self.select("USUARIO", ["ID_USER"], "ID_USER != ?", [user_id]):
-            # retornar todos os id_user (que nao sao o usuario) em cada posicao do vetor conversas 
-
-        
-        #return self.cursor.execute(f'''SELECT U.NOME, M.CONTEUDO, M.DATA_ENVIO FROM MENSAGEM_PRIVADA M
-        #                            OUTER JOIN USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER
-        #                            WHERE ID_USER_ORIGEM = ? OR ID_USER_DESTINO = ?''')
-        
+    def get_conversas_received(self, user_id):
+        self.connect()
+        result = self.cursor.execute(f'''SELECT M.ID_USER_ORIGEM, M.ID_USER_DESTINO, U.NOME, M.CONTEUDO, M.DATA_ENVIO
+                                     FROM MENSAGEM_PRIVADA M JOIN USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER
+                                     WHERE M.ID_USER_DESTINO = ?
+                                     ORDER BY M.DATA_ENVIO ASC''', [user_id]).fetchall()
+        return result
     
+    def get_user_name(self, user_id):
+        self.connect()
+        return self.select("USUARIO", ["NOME"], "ID_USER = ?", [user_id])[0][0]
         
 # Exemplo de uso da classe BD
 # #database.create("users", ["NOME VARCHAR(50)", "EMAIL VARCHAR(50)", "SENHA VARCHAR(50)"])
