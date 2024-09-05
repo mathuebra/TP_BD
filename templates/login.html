@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Inscrição</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="email" required>
+                <label for="login-password">Senha:</label>
+                <input type="password" id="login-password" name="senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+        <div class="form-container">
+            <h2>Inscrição</h2>
+            <form action="/signup" method="post">
+                <label for="signup-nome">Nome:</label>
+                <input type="text" id="signup-nome" name="nome" required>
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" name="email" required>
+                <label for="signup-password">Senha:</label>
+                <input type="password" id="signup-password" name="senha" required>
+                <label for="signup-data">Data de Nascimento:</label>
+                <input type="date" id="signup-data" name="data" required pattern="\d{2}/\d{2}/\d{4}">
+                <button type="submit">Inscrever-se</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

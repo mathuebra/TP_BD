@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5A6D7062-12F7-6249-5144-11BBA8D885E6" name="MENSAGEM_GRUPO">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:13:18 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<ordsAlias>table_5</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_MENSAGEM" id="1045C460-1B95-1B47-E191-523AD2EC0D25">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:14:50 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_USER_ORIGEM" id="EFF9118D-837C-4AF9-FA60-56505C53552F">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:12:21 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C6C0AF33-0299-B94C-C643-9FFD0E960BF2" referredColumn="26651AF2-669A-A2A1-867E-666CB388AECA"/>
+</associations>
+</Column>
+<Column name="ID_GRUPO_DESTINO" id="34933F0A-C590-369B-0F15-E432ADCDA5B4">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:12:53 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B5FA8E60-A3D1-68EA-CB38-412A0182B0DA" referredColumn="28730585-C983-B639-69D1-61B3F54472C4"/>
+</associations>
+</Column>
+<Column name="CONTEUDO" id="A9D6CE17-FDD6-66B0-A4C9-9544421ABDAE">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:14:50 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>250</dataTypeSize>
+<ownDataTypeParameters>250,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DATA_ENVIO" id="C9D7002A-994A-457D-AF71-8500C532FB91">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:14:50 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A95250E1-196B-4064-C07F-E8CEF71C267B" name="MENSAGEM_GRUPO_PK">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:14:50 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1045C460-1B95-1B47-E191-523AD2EC0D25"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="875D73B1-0245-B3AE-4556-0F44682EAE61" name="FK_MENSAGEM_GRUPO_ORIGEM">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:12:21 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EFF9118D-837C-4AF9-FA60-56505C53552F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="74F1B2D7-C00B-7F49-F722-1053195A2699" name="FK_MENSAGEM_GRUPO_DESTINO">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:12:53 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="34933F0A-C590-369B-0F15-E432ADCDA5B4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

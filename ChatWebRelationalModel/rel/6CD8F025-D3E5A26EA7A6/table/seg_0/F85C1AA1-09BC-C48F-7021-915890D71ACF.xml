@@ -1,0 +1,68 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F85C1AA1-09BC-C48F-7021-915890D71ACF" name="GRUPO">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:15:36 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<ordsAlias>table_6</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_GRUPO" id="28730585-C983-B639-69D1-61B3F54472C4">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:16:49 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRICAO" id="45FC3FF0-A576-D8EF-E23E-9FDA47E76FC2">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:16:49 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DATA_CRIACAO" id="398A9E92-5796-E465-6995-CDEF1FBC7E0A">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:16:49 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOME_GRUPO" id="3205A161-C5BB-084B-0355-C06F0DE5DBE1">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:16:49 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="AEF0512E-3B01-70C5-2099-57EF770205F8" name="GRUPO_PK">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:16:49 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="28730585-C983-B639-69D1-61B3F54472C4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="F31D01A4-BC8D-9797-F307-CB5BA6F9A10A" name="REACAO_GRUPO">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:19:35 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<ordsAlias>table_8</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_MENSAGEM" id="ACB5595E-7212-2143-05D3-3EE38D318EF5">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:15:42 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A4DFD667-B29E-7203-27A2-A5E88326EE18" referredColumn="1045C460-1B95-1B47-E191-523AD2EC0D25"/>
+</associations>
+</Column>
+<Column name="ID_USER_REAGE" id="4F49793F-0967-098A-9714-D4333860768E">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:16:26 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="94AE9CCB-C27D-810D-7691-51C2D73C394D" referredColumn="26651AF2-669A-A2A1-867E-666CB388AECA"/>
+</associations>
+</Column>
+<Column name="REACAO" id="5A90C47A-2230-A569-305B-6062D5615CA5">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:20:37 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="17F746A9-14AE-9AD5-A0BE-695C53784B95" name="FK_REACAO_GRUPO_MENSAGEM">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:15:42 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="ACB5595E-7212-2143-05D3-3EE38D318EF5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="3BF9E1A1-8183-B866-95D7-50145391B47F" name="FK_REACAO_GRUPO_USER">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:16:26 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4F49793F-0967-098A-9714-D4333860768E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

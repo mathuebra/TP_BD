@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="90E1CF0B-08C1-AE75-0FE0-223DD579E89A" containerWithKeyObject="06627732-FABB-C7AB-1982-A410758C9966" localFKIndex="E64FAE41-B374-761E-6428-6571F92193BB" name="FK_MENSAGEM_PRIVADA_DESTINOv2">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:10:48 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>39F00A6E-A3DF-C4C8-12DD-4892297DA6D2</referredTableID>
+<keyObject>761E953E-C4FE-D65B-6497-7115E1DFD455</keyObject>
+<referredKeyID>761E953E-C4FE-D65B-6497-7115E1DFD455</referredKeyID>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="39F00A6E-A3DF-C4C8-12DD-4892297DA6D2" name="USUARIO">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:50:15 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_USER" id="26651AF2-669A-A2A1-867E-666CB388AECA">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:51:12 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOME" id="979FABEE-CC4E-3133-E9D3-F1D8B79FC00C">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:51:31 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>25</dataTypeSize>
+<ownDataTypeParameters>25,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STATUS" id="5B882DD4-A377-4B2F-968A-B82087C5A3F9">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:51:49 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DATA_NASCIMENTO" id="7A69204F-AE9A-D757-2B49-4AC48DE05C12">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:52:08 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EMAIL" id="B484C3D7-270E-7CCD-87D0-5973D982A9E1">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:52:56 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SENHA" id="E289C9A2-5DA0-A1EC-AECD-7F0B61B6486F">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:52:56 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="761E953E-C4FE-D65B-6497-7115E1DFD455" name="USUARIO_PK">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:51:12 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="26651AF2-669A-A2A1-867E-666CB388AECA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

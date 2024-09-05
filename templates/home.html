@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+</head>
+<body>
+    <h1>Bem-vindo à sua página inicial</h1>
+    {% if conversas %}
+        <h2>Suas Conversas</h2>
+        <ul>
+            {% for conversa in conversas %}
+                <li>{{ conversa }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Você não tem conversas no momento.</p>
+    {% endif %}
+</body>
+</html>

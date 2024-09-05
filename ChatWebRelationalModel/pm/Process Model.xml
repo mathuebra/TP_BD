@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="18B4547A-D29E-5FC6-81AF-7D6036F5A07B">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:48:29 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</ProcessModel>

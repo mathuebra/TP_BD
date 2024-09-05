@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="ADF5E7DA-14D2-6A0A-9A19-2D8C2DCB7533">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:48:29 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>

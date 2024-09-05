@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4DE8DABD-8321-C632-0C37-943B04F50C63" name="PARTICIPA_DE">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:17:14 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<ordsAlias>table_7</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_USER" id="EA619202-3200-4E7A-EBF5-A45EFCD08582">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:18:03 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ID_GRUPO" id="F315922E-E509-FFBA-CC8C-72C3C86F0D92">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:18:03 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ADMINISTRADOR" id="16E6ABFB-FDB2-1245-FDA7-B4889742BE3A">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:18:23 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USUARIO_ID_USER" id="E93E7317-F96C-1C5B-7606-BCFC2707725E">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:14:07 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="41EC49EE-77D5-75D7-5D43-D5D1A3447DED" referredColumn="26651AF2-669A-A2A1-867E-666CB388AECA"/>
+</associations>
+</Column>
+<Column name="GRUPO_ID_GRUPO" id="30C5F900-F042-DF1D-893A-ED9477169EC2">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:14:26 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="6558A91A-9270-F9FA-DEDA-EBE755910B61" referredColumn="28730585-C983-B639-69D1-61B3F54472C4"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="600B741C-F8D3-2145-DA33-F841367A91FB" name="PARTICIPA_DE_PK">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 14:18:03 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EA619202-3200-4E7A-EBF5-A45EFCD08582"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="23606D94-CD09-34BD-5466-E76A4EA2400C" name="FK_PARTICIPA_DE_USUARIO">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:14:07 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E93E7317-F96C-1C5B-7606-BCFC2707725E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="50C73E8F-B8E4-2318-44D4-AD787249DACD" name="FK_PARTICIPA_DE_GRUPO">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:14:26 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="30C5F900-F042-DF1D-893A-ED9477169EC2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

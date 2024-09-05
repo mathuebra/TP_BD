@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="CD739C8F-F782-735B-8A2E-045BFDCE8EF8" mainViewID="C078E8B4-F34F-9EE3-4F2F-7A77F17CDC51">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-27 13:48:29 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

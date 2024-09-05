@@ -1,0 +1,14 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="94AE9CCB-C27D-810D-7691-51C2D73C394D" containerWithKeyObject="F31D01A4-BC8D-9797-F307-CB5BA6F9A10A" localFKIndex="3BF9E1A1-8183-B866-95D7-50145391B47F" name="FK_REACAO_GRUPO_USER">
+<createdBy>mathuebra</createdBy>
+<createdTime>2024-08-28 03:16:26 UTC</createdTime>
+<ownerDesignName>ChatWebRelationalModel</ownerDesignName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>39F00A6E-A3DF-C4C8-12DD-4892297DA6D2</referredTableID>
+<keyObject>761E953E-C4FE-D65B-6497-7115E1DFD455</keyObject>
+<referredKeyID>761E953E-C4FE-D65B-6497-7115E1DFD455</referredKeyID>
+<mandatory>true</mandatory>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
