@@ -1,9 +1,7 @@
 import sqlite3 as sql
 
-# TODO tratar erros possíveis pois o webframe não está tratando
-
 class BD:
-    database = "/home/mathuebra/VS/TP_BD/db"
+    database = "/home/mathuebra/VSCode/TP_BD/db" # Caminho do banco de dados local
     conn = None
     cursor = None
     connected = False
@@ -74,48 +72,42 @@ class BD:
         result = self.fetchall()
         self.disconnect()
         return result
-
         
-    def execute_unique(self, sql):
-        self.connect()
-        self.execute(sql)
-        self.persist()
-        self.disconnect()
-        
+    # Verifica se o login existe no banco de dados
     def verify_login(self, email, senha):
         result = self.select("USUARIO", ["ID_USER"], f"EMAIL = ? AND SENHA = ?", [email, senha])
         if result:
             return result[0]
     
+    # Cria usuário no banco de dados
     def create_user(self, nome, email, senha, data):
         status = None
         self.insert("USUARIO", ["NOME", "STATUS", "DATA_NASCIMENTO", "EMAIL", "SENHA"], [nome, status, data, email, senha])
-
-    def get_conversas_sent(self, user_id):
-        self.connect()
-        result = self.cursor.execute(f'''SELECT M.ID_USER_ORIGEM, M.ID_USER_DESTINO, U.NOME, M.CONTEUDO, M.DATA_ENVIO
-                                     FROM MENSAGEM_PRIVADA M JOIN USUARIO U ON M.ID_USER_DESTINO = U.ID_USER
-                                     WHERE M.ID_USER_ORIGEM = ?
-                                     ORDER BY M.DATA_ENVIO ASC''', [user_id]).fetchall()
-        return result
     
-    def get_conversas_received(self, user_id):
-        self.connect()
-        result = self.cursor.execute(f'''SELECT M.ID_USER_ORIGEM, M.ID_USER_DESTINO, U.NOME, M.CONTEUDO, M.DATA_ENVIO
-                                     FROM MENSAGEM_PRIVADA M JOIN USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER
-                                     WHERE M.ID_USER_DESTINO = ?
-                                     ORDER BY M.DATA_ENVIO ASC''', [user_id]).fetchall()
-        return result
-    
+    # Retorna o nome do usuário cujo user_id é passado como parâmetro
     def get_user_name(self, user_id):
-        self.connect()
         return self.select("USUARIO", ["NOME"], "ID_USER = ?", [user_id])[0][0]
+    
+    # Retorna o id de todos os usuários
+    def get_all_users(self):
+        return self.select("USUARIO", ["ID_USER"], "1=1", [])
+    
+    # Retorna uma tupla de 2 elementos contendo mensagem e data de envio (formato 'DD/MM/AAAA HH:MM:SS')
+    # de todas as mensagens privadas trocadas entre o usuário logado e o usuário passado como parâmetro
+    def get_conversas(self, user_id, user_other):
+        self.connect()
+        result = self.cursor.execute(f'''SELECT CONTEUDO, DATA_ENVIO FROM MENSAGEM_PRIVADA WHERE
+                                   (ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?) OR
+                                   (ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?)
+                                   ORDER BY DATA_ENVIO ASC''', [user_id, user_other, user_other, user_id]).fetchall()
+        self.disconnect()
+        return result
+
+    # Verifica se o usuário logado tem conversa com o usuário passado como parâmetro
+    def verify_conversas(self, user_id, user_other):
+        self.connect()
+        result = self.cursor.execute(f'''SELECT ID_MENSAGEM FROM MENSAGEM_PRIVADA WHERE
+                            ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ? OR
+                            ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?''', [user_id, user_other, user_other, user_id]).fetchall()
+        return True if result else False
         
-# Exemplo de uso da classe BD
-# #database.create("users", ["NOME VARCHAR(50)", "EMAIL VARCHAR(50)", "SENHA VARCHAR(50)"])
-# database.insert("users", ["Matheus", "mathuebra@gmail.com", "123e456"])
-# database.insert("users", ["Letícia", "leticinha@gmail.com", "123e456"])
-# database.execute_unique("INSERT INTO users VALUES ('Laura', 'laura@gmail.com', '123e456')")
-# database.execute_unique("INSERT INTO users VALUES ('Caio', 'caio@gmail.com', '123e456')")
-# # database.execute_unique("DROP TABLE users")
-# database.delete("users", "NOME = 'Laura'")

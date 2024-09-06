@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--Não sei nada de html fiquem a vontade pra comentar esse-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,15 +9,39 @@
 </head>
 <body>
     <h1>Bem-vindo à sua página inicial</h1>
-    {% if conversas %}
-        <h2>Suas Conversas</h2>
-        <ul>
-            {% for conversa in conversas %}
-                <li>{{ conversa }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Você não tem conversas no momento.</p>
-    {% endif %}
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>Suas Conversas</h2>
+            <ul id="user-list">
+                {% for conversa in conversas %}
+                    <li onclick="showMessages('{{ conversa.user_id }}')">{{ conversa.user_id }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="chat">
+            <div id="chat-window">
+                <p>Selecione uma conversa para ver as mensagens.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const conversas = {{ conversas|tojson }};
+        
+        function showMessages(userId) {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.innerHTML = '';
+
+            const userConversa = conversas.find(conversa => conversa.user_id == userId);
+            if (userConversa) {
+                userConversa.conversas.forEach(msg => {
+                    const messageElement = document.createElement('p');
+                    messageElement.textContent = `${msg[0]} - ${msg[1]}`;
+                    chatWindow.appendChild(messageElement);
+                });
+            }
+        }
+    </script>
 </body>
 </html>

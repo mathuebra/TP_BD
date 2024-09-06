@@ -1,6 +1,6 @@
-import new_backend
+from main import Database
 
-db = new_backend.BD()
+db = Database.BD()
 
 # sqlquery = '''SELECT CONTEUDO, DATA_ENVIO FROM MENSAGEM_PRIVADA 
 #             WHERE (ID_USER_ORIGEM = 1 AND ID_USER_DESTINO = 2) OR
@@ -36,17 +36,33 @@ def get_conversas3(self, user_id):
                                 ORDER BY M.DATA_ENVIO ASC''', [user_id]).fetchall()
   
     
-print(get_conversas2(db, 1))
-print(get_conversas3(db, 1)[0])
-print(db.select("USUARIO", ["NOME"], "ID_USER = ?", [1])[0][0])
+# print(get_conversas2(db, 1))
+# print(get_conversas3(db, 1)[0])
+# print(db.select("USUARIO", ["NOME"], "ID_USER = ?", [1])[0][0])
 
-alpha = get_conversas2(db, 1)
-lista = []
+print(db.verify_conversas(1, 2))
+print(db.get_all_users())
+print(db.get_conversas(1, 2))
 
-for i in alpha:
-    lista[alpha[i]] = alpha[i][3].append(alpha[i][4])
 
-print(lista)
+user_id = 1
+conversas_active = [] 
+conversas = []
+all_users = db.get_all_users()
+        
+for user in all_users:
+    current_user = user[0]
+    if db.verify_conversas(user_id, current_user):
+        conversas_active.append(current_user)  
+
+for current in conversas_active:
+    user_conversas = db.get_conversas(user_id, current)
+    conversas.append({
+        'user_id': db.get_user_name(current),
+        'conversas': user_conversas
+    })
+
+print(conversas)
 
 
 # print(db.select("MENSAGEM_PRIVADA", ["ID_USER_ORIGEM", "CONTEUDO", "DATA_ENVIO"], "(ID_USER_ORIGEM = 1 AND ID_USER_DESTINO = 2) OR (ID_USER_ORIGEM = 2 AND ID_USER_DESTINO = 1)"))

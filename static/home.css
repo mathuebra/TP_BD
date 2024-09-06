@@ -1,32 +1,62 @@
-/* static/css/home.css */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 h1 {
-    color: #333;
+    text-align: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
 }
 
-h2 {
-    color: #555;
+.container {
+    display: flex;
+    flex: 1;
 }
 
-ul {
+.sidebar {
+    width: 20%;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-right: 1px solid #ccc;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
     list-style-type: none;
     padding: 0;
 }
 
-li {
-    background-color: #fff;
-    margin-bottom: 10px;
+.sidebar ul li {
     padding: 10px;
-    border-radius: 4px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
-p {
-    color: #777;
+.sidebar ul li:hover {
+    background-color: #ddd;
+}
+
+.chat {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-window {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
 }
