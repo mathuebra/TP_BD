@@ -38,16 +38,22 @@
         function showMessages(userId, userName) {
             const chatWindow = document.getElementById('chat-window');
             chatWindow.innerHTML = '';
-
+        
             const userConversa = conversas.find(conversa => conversa.user_id == userId);
             if (userConversa) {
                 userConversa.conversas.forEach(msg => {
                     const messageElement = document.createElement('p');
                     messageElement.textContent = `${msg[0]} - ${msg[1]}`;
+        
+                    // Adicione uma classe se a mensagem for do destinatário
+                    if (msg[2] != '{{ session.user_id }}') {
+                        messageElement.classList.add('recipient-message');
+                    }
+        
                     chatWindow.appendChild(messageElement);
                 });
             }
-
+        
             document.getElementById('current-recipient-id').value = userId;
         }
 

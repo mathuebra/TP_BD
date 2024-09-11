@@ -3,7 +3,7 @@ import os
 import datetime
 
 class BD:
-    database = "/home/mathuebra/VS/TP_BD/db" # Caminho do banco de dados local
+    database = "/home/mathuebra/VSCode/TP_BD/db" # Caminho do banco de dados local
     conn = None
     cursor = None
     connected = False
@@ -101,7 +101,7 @@ class BD:
     # de todas as mensagens privadas trocadas entre o usuário logado e o usuário passado como parâmetro
     def get_conversas(self, user_id, user_other):
         self.connect()
-        result = self.cursor.execute(f'''SELECT CONTEUDO, DATA_ENVIO FROM MENSAGEM_PRIVADA WHERE
+        result = self.cursor.execute(f'''SELECT CONTEUDO, DATA_ENVIO, ID_USER_ORIGEM FROM MENSAGEM_PRIVADA WHERE
                                    (ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?) OR
                                    (ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?)
                                    ORDER BY DATA_ENVIO ASC''', [user_id, user_other, user_other, user_id]).fetchall()

@@ -35,6 +35,7 @@ def process_signup():
     db.create_user(nome, email, senha, data) # Criação de um novo usuário
     return redirect(url_for('login'))
 
+# Rota para a página inicial que vai mostrar as conversas
 @app.route('/home')
 def home():
     if 'user_id' in session:
@@ -51,9 +52,9 @@ def home():
         for current in conversas_active:
             user_conversas = db.get_conversas(user_id, current) # Pega a conversa do usuário logado com o outro
             conversas.append({ # Gera um dicionário cuja:
-                'user_id': current, # Chave é o usuário
-                'user_name': db.get_user_name(current), # Chave é o nome do usuário com quem o usuário logado tem a conversa
-                'conversas': user_conversas # Valor é a conversa em si, organizada numa tupla de 2 elementos que contem mensagem e data de envio
+                'user_id': current, # id do usuário atual
+                'user_name': db.get_user_name(current), # Nome do usuário com quem o usuário logado tem a conversa
+                'conversas': user_conversas # É a conversa em si, organizada numa tupla de 2 elementos que contem mensagem e data de envio
             })
 
         return render_template('home.html', conversas=conversas) # Renderiza o html home passando como parâmetro as conversas do usuário
