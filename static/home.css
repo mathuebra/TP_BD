@@ -1,62 +1,39 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-h1 {
-    text-align: center;
-    padding: 10px;
-    background-color: #f4f4f4;
-    margin: 0;
-    border-bottom: 1px solid #ccc;
-}
-
 .container {
     display: flex;
-    flex: 1;
 }
 
 .sidebar {
     width: 20%;
-    background-color: #f4f4f4;
     padding: 10px;
     border-right: 1px solid #ccc;
-    overflow-y: auto;
-}
-
-.sidebar h2 {
-    text-align: center;
-}
-
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.sidebar ul li:hover {
-    background-color: #ddd;
 }
 
 .chat {
-    flex: 1;
+    width: 80%;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#chat-window {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+#message-form {
     display: flex;
     flex-direction: column;
 }
 
-#chat-window {
-    flex: 1;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
+#message-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#message-form button {
+    align-self: flex-end;
 }

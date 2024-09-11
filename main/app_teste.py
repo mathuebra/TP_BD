@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, session, flash
+from flask import Flask, jsonify, request, render_template, redirect, url_for, session, flash
 import Database
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
@@ -51,13 +51,27 @@ def home():
         for current in conversas_active:
             user_conversas = db.get_conversas(user_id, current) # Pega a conversa do usuário logado com o outro
             conversas.append({ # Gera um dicionário cuja:
-                'user_id': db.get_user_name(current), # Chave é o nome do usuário com quem o usuário logado tem a conversa
+                'user_id': current, # Chave é o usuário
+                'user_name': db.get_user_name(current), # Chave é o nome do usuário com quem o usuário logado tem a conversa
                 'conversas': user_conversas # Valor é a conversa em si, organizada numa tupla de 2 elementos que contem mensagem e data de envio
             })
 
         return render_template('home.html', conversas=conversas) # Renderiza o html home passando como parâmetro as conversas do usuário
     else:
         return redirect(url_for('login')) # Se o usuário não estiver logado, redireciona pra login
+    
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user_other = request.form['recipient_id'] # Recebe o ID do destinatário
+        message = request.form['message']
+        
+        db.send_message(user_id, user_other, message)  # Envia a mensagem usando os IDs dos usuários
+
+        return jsonify({'status': 'success'})
+    else:
+        return jsonify({'status': 'error', 'message': 'User not logged in'})
 
 if __name__ == '__main__':
     app.run(debug=True)

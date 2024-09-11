@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--Não sei nada de html fiquem a vontade pra comentar esse-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +14,7 @@
             <h2>Suas Conversas</h2>
             <ul id="user-list">
                 {% for conversa in conversas %}
-                    <li onclick="showMessages('{{ conversa.user_id }}')">{{ conversa.user_id }}</li>
+                    <li onclick="showMessages('{{ conversa.user_id }}', '{{ conversa.user_name }}')">{{ conversa.user_name }}</li>
                 {% endfor %}
             </ul>
         </div>
@@ -23,13 +22,20 @@
             <div id="chat-window">
                 <p>Selecione uma conversa para ver as mensagens.</p>
             </div>
+            <div id="message-form">
+                <form onsubmit="sendMessage(event)">
+                    <input type="hidden" id="current-recipient-id">
+                    <textarea id="message-input" rows="3" placeholder="Digite sua mensagem..."></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
         const conversas = {{ conversas|tojson }};
         
-        function showMessages(userId) {
+        function showMessages(userId, userName) {
             const chatWindow = document.getElementById('chat-window');
             chatWindow.innerHTML = '';
 
@@ -41,6 +47,36 @@
                     chatWindow.appendChild(messageElement);
                 });
             }
+
+            document.getElementById('current-recipient-id').value = userId;
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+            const recipientId = document.getElementById('current-recipient-id').value;
+            const message = document.getElementById('message-input').value;
+
+            fetch('/send_message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `recipient_id=${recipientId}&message=${encodeURIComponent(message)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('message-input').value = '';
+                    // Adicionar a nova mensagem ao chatWindow
+                    const chatWindow = document.getElementById('chat-window');
+                    const messageElement = document.createElement('p');
+                    messageElement.textContent = `${message} - ${new Date().toLocaleString('pt-BR', { hour12: false })}`;
+                    chatWindow.appendChild(messageElement);
+                    chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll para a última mensagem
+                } else {
+                    alert('Erro ao enviar a mensagem: ' + data.message);
+                }
+            });
         }
     </script>
 </body>

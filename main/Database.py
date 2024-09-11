@@ -1,7 +1,9 @@
 import sqlite3 as sql
+import os
+import datetime
 
 class BD:
-    database = "/home/mathuebra/VSCode/TP_BD/db" # Caminho do banco de dados local
+    database = "/home/mathuebra/VS/TP_BD/db" # Caminho do banco de dados local
     conn = None
     cursor = None
     connected = False
@@ -88,6 +90,9 @@ class BD:
     def get_user_name(self, user_id):
         return self.select("USUARIO", ["NOME"], "ID_USER = ?", [user_id])[0][0]
     
+    def get_user_id(self, nome):
+        return self.select("USUARIO", ["ID_USER"], "NOME = ?", [nome])[0][0]    
+    
     # Retorna o id de todos os usuários
     def get_all_users(self):
         return self.select("USUARIO", ["ID_USER"], "1=1", [])
@@ -111,3 +116,11 @@ class BD:
                             ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?''', [user_id, user_other, user_other, user_id]).fetchall()
         return True if result else False
         
+    def send_message(self, user_id, user_other, message):
+        current_time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        self.insert("MENSAGEM_PRIVADA", 
+                    ["ID_USER_ORIGEM", "ID_USER_DESTINO", "CONTEUDO", "DATA_ENVIO", "STATUS"], 
+                    [user_id, user_other, message, current_time, "enviado"])
+        
+
+                    

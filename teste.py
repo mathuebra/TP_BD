@@ -40,9 +40,9 @@ def get_conversas3(self, user_id):
 # print(get_conversas3(db, 1)[0])
 # print(db.select("USUARIO", ["NOME"], "ID_USER = ?", [1])[0][0])
 
-print(db.verify_conversas(1, 2))
-print(db.get_all_users())
-print(db.get_conversas(1, 2))
+# print(db.verify_conversas(1, 2))
+# print(db.get_all_users())
+# print(db.get_conversas(1, 2))
 
 
 user_id = 1
@@ -63,6 +63,8 @@ for current in conversas_active:
     })
 
 print(conversas)
+
+print(db.get_user_id('Mateus'))
 
 
 # print(db.select("MENSAGEM_PRIVADA", ["ID_USER_ORIGEM", "CONTEUDO", "DATA_ENVIO"], "(ID_USER_ORIGEM = 1 AND ID_USER_DESTINO = 2) OR (ID_USER_ORIGEM = 2 AND ID_USER_DESTINO = 1)"))
