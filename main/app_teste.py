@@ -1,3 +1,4 @@
+import datetime
 from flask import Flask, jsonify, request, render_template, redirect, url_for, session, flash
 import Database
 
@@ -73,6 +74,69 @@ def send_message():
         return jsonify({'status': 'success'})
     else:
         return jsonify({'status': 'error', 'message': 'User not logged in'})
+
+# Rota para criar um novo grupo
+@app.route('/create_group', methods=['POST'])
+def create_group():
+    data = request.get_json()
+    
+    # Obtém os dados do JSON
+    group_name = data.get('name')
+    group_description = data.get('description', '')  # Descrição é opcional
+    creator_id = data.get('creator_id')
+    group_members = data.get('members', [])
+    
+    if not group_name or not creator_id:
+        return jsonify({'error': 'Nome do grupo e criador são obrigatórios'}), 400
+    
+    try:
+        # Cria o grupo
+        group_id = db.create_group(group_name, group_description, creator_id, group_members)
+        return jsonify({'group_id': group_id}), 201
+    except Exception as e:
+        # Em caso de erro, retorna uma mensagem de erro
+        return jsonify({'error': str(e)}), 500
+
+# Rota para adicionar um usuário a um grupo
+@app.route('/add_to_group', methods=['POST'])
+def add_to_group():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        group_id = request.form.get('group_id')
+        new_member = request.form.get('new_member')
+
+        if not group_id or not new_member:
+            return jsonify({'status': 'error', 'message': 'Group ID and new member are required'}), 400
+        
+        try:
+            # Adicionar o usuário ao grupo na base de dados
+            db.insert("PARTICIPA_DE", ["ID_USER", "ID_GRUPO", "ADMINISTRADOR"], [new_member, group_id, False])
+            return jsonify({'status': 'success'})
+        except Exception as e:
+            return jsonify({'status': 'error', 'message': str(e)}), 500
+    else:
+        return jsonify({'status': 'error', 'message': 'User not logged in'}), 401
+
+# Rota para enviar uma mensagem para um grupo
+@app.route('/send_group_message', methods=['POST'])
+def send_group_message():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        group_id = request.form.get('group_id')
+        message = request.form.get('message')
+        
+        if not group_id or not message:
+            return jsonify({'status': 'error', 'message': 'Group ID and message are required'}), 400
+        
+        try:
+            # Enviar a mensagem para o grupo na base de dados
+            db.insert("MENSAGEM_GRUPO", ["ID_USER", "ID_GRUPO", "CONTEUDO", "DATA_ENVIO"], [user_id, group_id, message, datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")])
+            return jsonify({'status': 'success'})
+        except Exception as e:
+            return jsonify({'status': 'error', 'message': str(e)}), 500
+    else:
+        return jsonify({'status': 'error', 'message': 'User not logged in'}), 401
+
 
 if __name__ == '__main__':
     app.run(debug=True)

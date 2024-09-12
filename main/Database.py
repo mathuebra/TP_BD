@@ -3,7 +3,7 @@ import os
 import datetime
 
 class BD:
-    database = "/home/mathuebra/VSCode/TP_BD/db" # Caminho do banco de dados local
+    database = "/home/mathuebra/VS/TP_BD/db" # Caminho do banco de dados local
     conn = None
     cursor = None
     connected = False
@@ -122,5 +122,18 @@ class BD:
                     ["ID_USER_ORIGEM", "ID_USER_DESTINO", "CONTEUDO", "DATA_ENVIO", "STATUS"], 
                     [user_id, user_other, message, current_time, "enviado"])
         
+    def create_group(self, group_name, group_description, creator_id, group_members):
+        self.insert("GRUPO", ["NOME_GRUPO", "DESCRICAO", "DATA_CRIACAO"], [group_name, group_description, datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")])
 
-                    
+        # Obtém o ID do grupo recém-criado
+        self.connect()
+        group_id = self.cursor.execute(f'''SELECT ID_GRUPO FROM GRUPO 
+                                       ORDER BY DATA_CRIACAO DESC LIMIT 1''').fetchall()[0][0]
+        self.disconnect()
+        
+        # Insere os membros no grupo
+        for member_id in group_members:
+            # Assume que o criador é um administrador por padrão
+            self.insert("PARTICIPA_DE", ["ID_USER", "ID_GRUPO", "ADMINISTRADOR"], [member_id, group_id, 1 if member_id == creator_id else 0])
+
+        return group_id

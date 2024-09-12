@@ -1,14 +1,20 @@
-/* static/css/login.css */
+.header {
+    background-color: #007bff; /* Cor de fundo semelhante ao anterior */
+    color: white; /* Cor do texto */
+    text-align: center; /* Centraliza o texto */
+    padding: 20px 0; /* Espaçamento superior e inferior */
+    font-size: 2em; /* Tamanho da fonte */
+}
+
+/* Estilo geral do corpo da página */
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 20px;
 }
 
+/* Estilo para o contêiner das formas de login/inscrição */
 .container {
     display: flex;
     justify-content: space-between;
@@ -16,56 +22,41 @@ body {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 80%;
+    width: 93%;
     max-width: 800px;
 }
 
+/* Estilo para os contêineres dos formulários */
 .form-container {
     width: 45%;
 }
 
-h2 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-input[type="email"],
-input[type="password"],
-input[type="text"],
-input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-input[type="date"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
+/* Estilo para os botões */
 button {
-    width: 100%;
-    padding: 10px;
     background-color: #007bff;
+    color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 4px;
-    color: #fff;
-    font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
+/* Estilo para os botões ao passar o mouse */
 button:hover {
     background-color: #0056b3;
+}
+
+/* Estilo para os rótulos (labels) e inputs */
+label, input {
+    display: block;
+    margin-bottom: 10px;
+    width: 93%;
+}
+
+/* Estilo para os inputs */
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

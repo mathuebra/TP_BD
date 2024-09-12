@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,61 +7,136 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 </head>
 <body>
-    <h1>Bem-vindo à sua página inicial</h1>
+    <h1>Página Inicial</h1>
     
     <div class="container">
+        <!-- Sidebar para listar as conversas -->
         <div class="sidebar">
             <h2>Suas Conversas</h2>
             <ul id="user-list">
+                <!-- Loop para gerar a lista de conversas -->
                 {% for conversa in conversas %}
                     <li onclick="showMessages('{{ conversa.user_id }}', '{{ conversa.user_name }}')">{{ conversa.user_name }}</li>
                 {% endfor %}
             </ul>
+            <!-- Formulário para criar novo grupo -->
+            <div id="create-group-form">
+                <h3>+ Novo Grupo</h3>
+                <form onsubmit="createGroup(event)">
+                    <input type="text" id="group-name" placeholder="Nome do Grupo" required>
+                    <input type="text" id="group-description" placeholder="Descrição do Grupo">
+                    <input type="text" id="group-members" placeholder="IDs dos Membros (separados por vírgula)" required>
+                    <button type="submit">Criar Grupo</button>
+                </form>
+            </div>
         </div>
+
+        <!-- Area do chat principal -->
         <div class="chat">
+            <!-- Cabeçalho para exibir o nome do usuário -->
+            <div id="chat-header">
+                <h2 id="recipient-name"></h2>
+            </div>
+            <!-- Janela de chat onde as mensagens serão exibidas -->
             <div id="chat-window">
                 <p>Selecione uma conversa para ver as mensagens.</p>
             </div>
+
+            <!-- Barra de envio de mensagem -->
             <div id="message-form">
                 <form onsubmit="sendMessage(event)">
                     <input type="hidden" id="current-recipient-id">
-                    <textarea id="message-input" rows="3" placeholder="Digite sua mensagem..."></textarea>
+                    <div class="form-controls">
+                        <textarea id="message-input" rows="3" placeholder="Digite sua mensagem..."></textarea>
                     <button type="submit">Enviar</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 
     <script>
-        const conversas = {{ conversas|tojson }};
+        // Converte a variável do template para um objeto JS
+        const conversas = {{ conversas|tojson|safe }};
         
+        // Função para criar um elemento de mensagem
+        function createMessageElement(text, date, isSent) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(isSent ? 'sent-message' : 'recipient-message');
+
+            const messageText = document.createElement('p');
+            messageText.textContent = text;
+
+            const messageDate = document.createElement('span');
+            messageDate.textContent = date;
+            messageDate.classList.add('message-date');
+
+            messageElement.appendChild(messageText);
+            messageElement.appendChild(messageDate);
+
+            return messageElement;
+        }
+
+        // Função para exibir mensagens na janela de chat
         function showMessages(userId, userName) {
             const chatWindow = document.getElementById('chat-window');
+            const messageForm = document.getElementById('message-form');
+            // Mostra o nome da conversa
+            const recipientName = document.getElementById('recipient-name');
+            recipientName.textContent = userName;
+
+            // Limpa o conteudi atual da janela de chat
             chatWindow.innerHTML = '';
-        
+
+            // Oculta a barra de envio de mensagem até que uma conversa seja selecionada
+            messageForm.style.display = 'none';
+
+            // Encontra a conversa correspondente ao usuário selecionado
             const userConversa = conversas.find(conversa => conversa.user_id == userId);
             if (userConversa) {
+                // Itera sobre cada mensagem na conversa
                 userConversa.conversas.forEach(msg => {
-                    const messageElement = document.createElement('p');
-                    messageElement.textContent = `${msg[0]} - ${msg[1]}`;
-        
-                    // Adicione uma classe se a mensagem for do destinatário
-                    if (msg[2] != '{{ session.user_id }}') {
-                        messageElement.classList.add('recipient-message');
-                    }
-        
+                    const [messageText, messageDate, senderId] = msg;
+                    // Verifica se a mensagem foi enviada pelo usuário atual
+                    const isSent = senderId == '{{ session.user_id }}';
+
+                    // Formata a data para exibir apenas horas e minutos
+                    const formattedDate = new Date(messageDate).toLocaleTimeString('pt-BR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    // Cria um elemento para a mensagem
+                    const messageElement = createMessageElement(messageText, formattedDate, isSent);
+                    // Adiciona a mensagem à janela de chat
                     chatWindow.appendChild(messageElement);
                 });
+
+                // Rola a janela de chat para mostrar a última mensagem
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+                // Exibe a barra de envio de mensagem 
+                messageForm.style.display = 'block';
             }
-        
+            
+            // Atualiza o campo oculto com o id do destinatário
             document.getElementById('current-recipient-id').value = userId;
         }
 
+        // Função para enviar uma mensagem
         function sendMessage(event) {
             event.preventDefault();
+
+            // Obtém o id do destinatário e o texto da mensagem
             const recipientId = document.getElementById('current-recipient-id').value;
             const message = document.getElementById('message-input').value;
 
+            // Verifica se o campo de mensagem está vazio
+            if (!message) {
+                alert('Digite uma mensagem antes de enviar.');
+                return;
+            }
+
+            // Envia a mensagem para o servidor usando fetch
             fetch('/send_message', {
                 method: 'POST',
                 headers: {
@@ -69,19 +144,67 @@
                 },
                 body: `recipient_id=${recipientId}&message=${encodeURIComponent(message)}`
             })
-            .then(response => response.json())
+            .then(response => response.json()) // Converte a resposta para JSON
             .then(data => {
                 if (data.status === 'success') {
+                    // Limpa o campo de entrada de mensagem
                     document.getElementById('message-input').value = '';
-                    // Adicionar a nova mensagem ao chatWindow
                     const chatWindow = document.getElementById('chat-window');
-                    const messageElement = document.createElement('p');
-                    messageElement.textContent = `${message} - ${new Date().toLocaleString('pt-BR', { hour12: false })}`;
+                    const currentDate = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                    // Cria um elemento para a nova mensagem enviada
+                    const messageElement = createMessageElement(message, currentDate, true);
                     chatWindow.appendChild(messageElement);
-                    chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll para a última mensagem
+                    // Rola a janela de chat para mostrar a última mensagem
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
                 } else {
                     alert('Erro ao enviar a mensagem: ' + data.message);
                 }
+            });
+        }
+
+        // Função para criar um grupo
+        function createGroup(event) {
+            event.preventDefault();
+
+            // Obtém o nome do grupo e os IDs dos membros
+            const groupName = document.getElementById('group-name').value;
+            const groupDescription = document.getElementById('group-description').value;
+            const groupMembers = document.getElementById('group-members').value.split(',').map(id => id.trim());
+            
+            // Verifica se o nome do grupo e os IDs dos membros estão preenchidos
+            if (!groupName || !groupMembers.length) {
+               alert('Nome do grupo e IDs dos membros são obrigatórios.');
+               return;
+            }
+
+            // Envia o formulário para o servidor usando fetch
+            fetch('/create_group', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: groupName,
+                    description: groupDescription,
+                    creator_id: '{{ session.user_id }}',
+                    members: groupMembers
+                })
+            })
+            .then(response => response.json()) // Converte a resposta para JSON
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Grupo criado com sucesso!');
+                    // Limpa o formulário de criação de grupo
+                    document.getElementById('group-name').value = '';
+                    document.getElementById('group-description').value = '';
+                    document.getElementById('group-members').value = '';
+                } else {
+                    alert('Erro ao criar o grupo: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao criar o grupo. Verifique o console para mais detalhes.');
             });
         }
     </script>
