@@ -92,24 +92,65 @@ for current in messages:
 
 grupo_active = []
 grupo_message = []
+grupo_active_temp = []
 
 user_id = 1
 
+i = 0
+
+
 for each in db.verify_all_groups(user_id):
-    grupo_active.append(each[0])
-    
-for current in grupo_active:
+    grupo_active.append({
+        'group_id': each[0], 
+        'group_name' : db.get_grupo_name(each[0]),
+        'conversas' : []
+    })
+
+for each in db.verify_all_groups(user_id):
+    grupo_active_temp.append(each[0])
+
+for each in grupo_active_temp:
+    grupo_active[i]['conversas'] = db.get_group_message(each)
+    i += 1
+
+print(grupo_active)
+
+
+for current in grupo_active_temp:
     grupo_total_conversas = db.get_group_message(current)
     qnt_msg_grupo = db.get_qnt_message_group(current)
     for actual in range(qnt_msg_grupo):
         grupo_message.append({
             'group_id': current,
-            'user_name': grupo_total_conversas[actual][2],
+            'group_name': grupo_total_conversas[actual][2],
+            'user_name': grupo_total_conversas[actual][3],
             'message': grupo_total_conversas[actual][0],
             'date': grupo_total_conversas[actual][1]
         })
     
-print(grupo_message)
+# print(grupo_message)
+
+user_id = 1 # Pega o id do usuário logado
+all_users = db.get_all_users() # Gera o id de todos os usuários
+conversas_active = [] # Lista de todos os usuários com quem o usuário logado tem conversa ativa
+conversas = [] # Lista todas as conversas
+grupo_message = []
+grupo_active = []
+  
+for user in all_users:
+    target_user = user[0] # Pega o id da pessoa com quem o usuário logado tem conversa
+    if db.verify_conversas(user_id, target_user): # Verifica se o usuário logado tem conversa com a pessoa
+        conversas_active.append(target_user) # Adiciona a pessoa na lista de conversas ativas
+    
+for current in conversas_active:
+    user_conversas = db.get_conversas(user_id, current) # Pega a conversa do usuário logado com o outro
+    conversas.append({ # Gera um dicionário cuja:
+        'user_id': current, # id do usuário atual
+        'user_name': db.get_user_name(current), # Nome do usuário com quem o usuário logado tem a conversa
+        'conversas': user_conversas # É a conversa em si, organizada numa tupla de 2 elementos que contem mensagem e data de envio
+    }) 
+
+# print(conversas)
 
 # print(db.get_conversas(1, 2))
     # if 'user_id' in session:

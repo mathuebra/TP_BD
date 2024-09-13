@@ -11,8 +11,8 @@
         <div class="sidebar">
             <h2>Grupos</h2>
             <ul id="group-list">
-                {% for group in groupMessages %}
-                    <li onclick="showMessages('{{ group.group_id }}', '{{ group.user_name }}')">{{ conversa.user_name }}</li>
+                {% for grupo in grupo_active %}
+                    <li onclick="showMessages('{{ grupo.group_id }}', '{{ grupo.group_name }}')">{{ grupo.group_name }}</li>
                 {% endfor %}
             </ul>
         </div>
@@ -30,14 +30,16 @@
     </div>
 
     <script>
-        const groupMessages = [
+        /*const groupMessages = [
             {'group_id': 1, 'user_name': 'Matheus', 'message': 'oi grupo teste 1', 'date': '13/11/2024 13:58:01'},
             {'group_id': 1, 'user_name': 'Letícia', 'message': 'resposta teste 1', 'date': '13/11/2024 13:59:00'},
             {'group_id': 1, 'user_name': 'Mateus', 'message': 'leticia ta fazendo circuitos?', 'date': '13/11/2024 13:59:30'}
-        ];
+        ];*/
+
+        const group_message = {group_message|tojson};
 
         // Função para exibir mensagens do grupo
-        function displayMessages(messages) {
+        /*function displayMessages(messages) {
             const chatWindow = document.getElementById('chat-window');
             chatWindow.innerHTML = '';
 
@@ -51,7 +53,7 @@
                 `;
                 chatWindow.appendChild(messageElement);
             });
-        }
+        }*/
 
         // Exibir mensagens ao carregar a página
         displayMessages(groupMessages);

@@ -156,7 +156,7 @@ class BD:
     
     def get_group_message(self, id_group):
         self.connect()
-        result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME
+        result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, G.NOME_GRUPO, U.NOME
                                      FROM MENSAGEM_GRUPO M
                                      LEFT OUTER JOIN USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER
                                      LEFT OUTER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO_DESTINO
@@ -169,3 +169,6 @@ class BD:
     
     def get_qnt_message_group(self, id_group):
         return self.select("MENSAGEM_GRUPO", ["COUNT(*)"], "ID_GRUPO_DESTINO = ?", [id_group])[0][0]
+
+    def get_grupo_name(self, id_group):
+        return self.select("GRUPO", ["NOME_GRUPO"], "ID_GRUPO = ?", [id_group])[0][0]
