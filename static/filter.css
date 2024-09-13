@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.sidebar {
+    background-color: #f4f4f4;
+    padding: 10px;
+    height: 75vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+#filter-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#filter-form label {
+    margin-bottom: 10px;
+}
+
+#filter-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#filter-form button:hover {
+    background-color: #0056b3;
+}
+
+.chat {
+    width: 90%;
+    height: 70vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#chat-window {
+    padding: 10px;
+    background-color: #fff;
+    overflow-y: auto;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: gray;
+    font-style: italic;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 30px;
+    align-self: flex-start;
+    min-width: 90px;
+    width: fit-content;
+    max-width: 60%;
+    padding: 5px 10px;
+    margin-bottom: 8px;
+    min-height: 30px;
+    line-height: 1.2;
+    color: floralwhite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+}
+
+.recipient-message {
+    background-color: #999ca8;
+    text-align: left;
+    align-self: flex-start;
+    font-style: normal;
+    padding: 18px;
+}
+
+.sent-message {
+    background-color: #2a85d5;
+    text-align: left;
+    align-self: flex-end;
+    font-style: normal;
+    padding: 18px;
+}
+
+.message-date {
+    font-size: 0.7em;
+    color: #c1c1c1;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    align-self: flex-end;
+    display: block;
+}

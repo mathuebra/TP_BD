@@ -112,8 +112,8 @@ class BD:
     def verify_conversas(self, user_id, user_other):
         self.connect()
         result = self.cursor.execute(f'''SELECT ID_MENSAGEM FROM MENSAGEM_PRIVADA WHERE
-                            ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ? OR
-                            ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?''', [user_id, user_other, user_other, user_id]).fetchall()
+                                     ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ? OR
+                                     ID_USER_ORIGEM = ? AND ID_USER_DESTINO = ?''', [user_id, user_other, user_other, user_id]).fetchall()
         return True if result else False
         
     def send_message(self, user_id, user_other, message):
@@ -137,3 +137,16 @@ class BD:
             self.insert("PARTICIPA_DE", ["ID_USER", "ID_GRUPO", "ADMINISTRADOR"], [member_id, group_id, 1 if member_id == creator_id else 0])
 
         return group_id
+    
+    def filter_message(self, user_id, sent):
+        self.connect()
+        if sent:
+            result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME FROM MENSAGEM_PRIVADA M JOIN
+                                        USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER WHERE
+                                        M.ID_USER_ORIGEM = ?''', [user_id]).fetchall()
+        else:
+            result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME FROM MENSAGEM_PRIVADA M JOIN
+                                         USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER WHERE
+                                         M.ID_USER_DESTINO = ?''', [user_id]).fetchall()
+        self.disconnect()
+        return result

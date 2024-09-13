@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtrar Mensagens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='filter.css') }}">
+</head>
+<body>
+    <h1>Filtrar Mensagens</h1>
+    
+    <div class="container">
+        <div class="sidebar">
+            <h2>Opções de Filtro</h2>
+            <form id="filter-form">
+                <label>
+                    <input type="radio" name="filter" value="sent" checked> Mensagens Enviadas
+                </label>
+                <label>
+                    <input type="radio" name="filter" value="received"> Mensagens Recebidas
+                </label>
+                <button type="submit">Aplicar Filtro</button>
+            </form>
+        </div>
+
+        <div class="chat">
+            <div id="chat-window">
+                <p>Selecione um filtro para ver as mensagens.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('filter-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const filter = document.querySelector('input[name="filter"]:checked').value;
+            
+            fetch(`/filter_messages?filter=${filter}`)
+                .then(response => response.json())
+                .then(data => {
+                    const chatWindow = document.getElementById('chat-window');
+                    chatWindow.innerHTML = '';
+                    
+                    if (data.messages.length > 0) {
+                        data.messages.forEach(msg => {
+                            const messageElement = createMessageElement(msg.text, msg.date, filter === 'sent');
+                            chatWindow.appendChild(messageElement);
+                        });
+                    } else {
+                        chatWindow.innerHTML = '<p>Nenhuma mensagem encontrada.</p>';
+                    }
+                });
+        });
+
+        function createMessageElement(text, date, isSent) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(isSent ? 'sent-message' : 'recipient-message');
+
+            const messageText = document.createElement('p');
+            messageText.textContent = text;
+
+            const messageDate = document.createElement('span');
+            messageDate.textContent = new Date(date).toLocaleTimeString('pt-BR', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            messageDate.classList.add('message-date');
+
+            messageElement.appendChild(messageText);
+            messageElement.appendChild(messageDate);
+
+            return messageElement;
+        }
+    </script>
+</body>
+</html>

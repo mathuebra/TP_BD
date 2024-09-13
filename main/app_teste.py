@@ -136,6 +136,12 @@ def send_group_message():
             return jsonify({'status': 'error', 'message': str(e)}), 500
     else:
         return jsonify({'status': 'error', 'message': 'User not logged in'}), 401
+    
+@app.route('/filter', methods=['POST'])
+def filter():
+    if 'user_id' in session:
+        user_id = session['user_id']
+        
 
 
 if __name__ == '__main__':

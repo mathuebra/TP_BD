@@ -64,11 +64,16 @@ for current in conversas_active:
 
 print(conversas)
 
-print(db.get_user_id('Mateus'))
-
+db.create_group("Grupo 1", "Grupo de teste", 1, [1,2,3])
 
 # print(db.select("MENSAGEM_PRIVADA", ["ID_USER_ORIGEM", "CONTEUDO", "DATA_ENVIO"], "(ID_USER_ORIGEM = 1 AND ID_USER_DESTINO = 2) OR (ID_USER_ORIGEM = 2 AND ID_USER_DESTINO = 1)"))
 
 # db.connect()
 # print(db.cursor.execute(f'''SELECT ID_USER_ORIGEM, CONTEUDO, DATA_ENVIO FROM MENSAGEM_PRIVADA WHERE (ID_USER_ORIGEM = 1 AND ID_USER_DESTINO = 2) OR (ID_USER_ORIGEM = 2 AND ID_USER_DESTINO = 1)''').fetchall())
 # db.disconnect()
+
+db.connect()
+result = db.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME FROM MENSAGEM_PRIVADA M JOIN
+                           USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER WHERE
+                           M.ID_USER_DESTINO = ?''', [1]).fetchall()
+print(result)
