@@ -38,6 +38,8 @@ h1, h2 {
 #user-list {
     list-style-type: none;
     padding: 0;
+    max-height: 100%; /* Permitir que a lista de usuários utilize a altura total disponível */
+    overflow-y: auto; /* Permitir rolagem vertical na lista de usuários */
 }
 
 /* Estilo para itens da lista de usuário */
@@ -50,9 +52,9 @@ h1, h2 {
 }
 
 /* Remove o separador do último item da lista */
-#user-list li:not(:last-child) {
-    margin-bottom: 15px; /* Ajusta o espaçamento entre os itens */
-}
+/*#user-list li:not(:last-child) {
+    margin-bottom: 15px; /* Ajusta o espaçamento entre os itens 
+}*/
 
 /* Estilo para itens ao passar o mouse */
 #user-list li:hover {
