@@ -138,15 +138,18 @@ class BD:
 
         return group_id
     
-    def filter_message(self, user_id, sent):
+    def filter_message_sent(self, user_id):
         self.connect()
-        if sent:
-            result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME FROM MENSAGEM_PRIVADA M JOIN
-                                        USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER WHERE
-                                        M.ID_USER_ORIGEM = ?''', [user_id]).fetchall()
-        else:
-            result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME FROM MENSAGEM_PRIVADA M JOIN
-                                         USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER WHERE
-                                         M.ID_USER_DESTINO = ?''', [user_id]).fetchall()
+        result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME FROM MENSAGEM_PRIVADA M JOIN
+                                     USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER WHERE
+                                     M.ID_USER_ORIGEM = ?''', [user_id]).fetchall()
+        self.disconnect()
+        return result
+    
+    def filter_message_received(self, user_id):
+        self.connect()
+        result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME FROM MENSAGEM_PRIVADA M JOIN
+                                     USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER WHERE
+                                     M.ID_USER_DESTINO = ?''', [user_id]).fetchall()
         self.disconnect()
         return result

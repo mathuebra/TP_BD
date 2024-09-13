@@ -12,6 +12,8 @@
     <div class="container">
         <!-- Sidebar para listar as conversas -->
         <div class="sidebar">
+            <!-- Botão de filtro -->
+            <button onclick="location.href='/filter'" class="filter-button">Filtrar Mensagens</button>
             <h2>Suas Conversas</h2>
             <ul id="user-list">
                 <!-- Loop para gerar a lista de conversas -->
@@ -48,7 +50,7 @@
                     <input type="hidden" id="current-recipient-id">
                     <div class="form-controls">
                         <textarea id="message-input" rows="3" placeholder="Digite sua mensagem..."></textarea>
-                    <button type="submit">Enviar</button>
+                        <button type="submit">Enviar</button>
                     </div>
                 </form>
             </div>

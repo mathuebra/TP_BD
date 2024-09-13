@@ -137,11 +137,26 @@ def send_group_message():
     else:
         return jsonify({'status': 'error', 'message': 'User not logged in'}), 401
     
-@app.route('/filter', methods=['POST'])
+# Página de filtro
+@app.route('/filter')
 def filter():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        
+    conversas = []
+    return render_template('filter.html', conversas=conversas, filter_type=None)
+
+# Endpoint para filtrar mensagens
+@app.route('/filter_messages', methods=['POST'])
+def filter_messages():
+    user_id = session.get('user_id')
+    filter_type = request.form.get('filter')
+    
+    if filter_type == 'sent':
+        messages = db.filter_message_sent(user_id)  # Função para obter mensagens enviadas
+    else:
+        messages = db.filter_message_received(user_id)  # Função para obter mensagens recebidas
+
+    conversas = [{'user_name': msg[0], 'message': msg[1], 'date': msg[2]} for msg in messages]
+    
+    return render_template('filter.html', conversas=conversas)
 
 
 if __name__ == '__main__':
