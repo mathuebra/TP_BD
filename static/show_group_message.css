@@ -1,0 +1,178 @@
+/* Configurações gerais do corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Estilo para os cabeçalhos */
+h1, h2 {
+    color: #333;
+}
+
+/* Contêiner principal com layout flexível */
+.container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Estilo para barra lateral */
+.sidebar {
+    background-color: #f4f4f4;
+    padding: 10px;
+    height: 75vh;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Estilo específico para o cabeçalho da barra lateral */
+.sidebar h2 {
+    margin-top: 0;
+}
+
+/* Lista de grupos na barra lateral */
+#group-list {
+    list-style-type: none;
+    padding: 0;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+/* Estilo para itens da lista de grupos */
+#group-list li {
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Estilo para itens ao passar o mouse */
+#group-list li:hover {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 11px;
+}
+
+/* Área de chat principal */
+.chat {
+    width: 90%;
+    height: 70vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Janela de chat onde as mensagens são exibidas */
+#chat-window {
+    padding: 10px;
+    background-color: #fff;
+    overflow-y: auto;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: gray;
+    font-style: italic;
+}
+
+/* Estilo básico para a mensagem */
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 30px;
+    align-self: flex-start;
+    min-width: 90px;
+    width: fit-content;
+    max-width: 60%;
+    padding: 5px 10px;
+    margin-bottom: 8px;
+    min-height: 30px;
+    line-height: 1.2;
+    color: floralwhite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+}
+
+/* Estilo para mensagens recebidas */
+.recipient-message {
+    background-color: #999ca8;
+    text-align: left;
+    align-self: flex-start;
+    font-style: normal;
+    padding: 18px;
+}
+
+/* Estilo para mensagens enviadas */
+.sent-message {
+    background-color: #2a85d5;
+    text-align: left;
+    align-self: flex-end;
+    font-style: normal;
+    padding: 18px;
+}
+
+/* Estilo para a data da mensagem */
+.message-date {
+    font-size: 0.7em; 
+    color: #c1c1c1; 
+    font-weight: bold;
+    text-align: right;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    align-self: flex-end;
+    display: block;
+}
+
+/* Estilo para o formulário de mensagens */
+#message-form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Controles do formulário de mensagens */
+#message-form .form-controls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Estilo para a área de texto do formulário */
+#message-form textarea {
+    flex: 1;
+    width: 93%;
+    padding: 11px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    resize: none;
+    box-sizing: border-box;
+    height: 40px;
+}
+
+/* Estilo para o botão de envio do formulário */
+#message-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-sizing: border-box;
+    height: 40px;
+    font-weight: bold;
+}
+
+/* Estilo para o botão de envio ao passar o mouse */
+#message-form button:hover {
+    background-color: #0056b3;
+}

@@ -174,6 +174,9 @@ def filter_messages():
     
     return render_template('filter.html', conversas=conversas)
 
+@app.route('/show_group_message', methods=['GET'])
+def show_group_message():
+    return render_template('show_group_message.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

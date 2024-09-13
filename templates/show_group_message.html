@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='show_group_message.css') }}">
+    <title>Group Messages</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Grupos</h2>
+            <ul id="group-list">
+                {% for group in groupMessages %}
+                    <li onclick="showMessages('{{ group.group_id }}', '{{ group.user_name }}')">{{ conversa.user_name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="chat">
+            <div id="chat-window">
+                <!-- As mensagens do grupo vão aqui -->
+            </div>
+            <form id="message-form">
+                <div class="form-controls">
+                    <textarea id="message-input" placeholder="Digite sua mensagem..."></textarea>
+                    <button type="submit">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const groupMessages = [
+            {'group_id': 1, 'user_name': 'Matheus', 'message': 'oi grupo teste 1', 'date': '13/11/2024 13:58:01'},
+            {'group_id': 1, 'user_name': 'Letícia', 'message': 'resposta teste 1', 'date': '13/11/2024 13:59:00'},
+            {'group_id': 1, 'user_name': 'Mateus', 'message': 'leticia ta fazendo circuitos?', 'date': '13/11/2024 13:59:30'}
+        ];
+
+        // Função para exibir mensagens do grupo
+        function displayMessages(messages) {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.innerHTML = '';
+
+            messages.forEach(msg => {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', msg.user_name === 'Matheus' ? 'sent-message' : 'recipient-message');
+                messageElement.innerHTML = `
+                    <strong>${msg.user_name}</strong>
+                    <p>${msg.message}</p>
+                    <span class="message-date">${msg.date}</span>
+                `;
+                chatWindow.appendChild(messageElement);
+            });
+        }
+
+        // Exibir mensagens ao carregar a página
+        displayMessages(groupMessages);
+    </script>
+</body>
+</html>
