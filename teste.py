@@ -72,7 +72,7 @@ db = Database.BD()
 # print(db.cursor.execute(f'''SELECT ID_USER_ORIGEM, CONTEUDO, DATA_ENVIO FROM MENSAGEM_PRIVADA WHERE (ID_USER_ORIGEM = 1 AND ID_USER_DESTINO = 2) OR (ID_USER_ORIGEM = 2 AND ID_USER_DESTINO = 1)''').fetchall())
 # db.disconnect()
 
-print(db.filter_message_sent(1))
+# print(db.filter_message_sent(1))
 conversas = []
 messages = db.filter_message_sent(1)
 for current in messages:
@@ -82,8 +82,34 @@ for current in messages:
         'date': current[1]
     })
     
-print(conversas)
+# print(conversas)
 
+# print(db.get_group_message(2))
+# print(db.verify_all_groups(1))
+
+# grupo_active = db.verify_all_groups(1)
+# print(grupo_active)
+
+grupo_active = []
+grupo_message = []
+
+user_id = 1
+
+for each in db.verify_all_groups(user_id):
+    grupo_active.append(each[0])
+    
+for current in grupo_active:
+    grupo_total_conversas = db.get_group_message(current)
+    qnt_msg_grupo = db.get_qnt_message_group(current)
+    for actual in range(qnt_msg_grupo):
+        grupo_message.append({
+            'group_id': current,
+            'user_name': grupo_total_conversas[actual][2],
+            'message': grupo_total_conversas[actual][0],
+            'date': grupo_total_conversas[actual][1]
+        })
+    
+print(grupo_message)
 
 # print(db.get_conversas(1, 2))
     # if 'user_id' in session:

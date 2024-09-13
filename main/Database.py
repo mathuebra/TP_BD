@@ -153,3 +153,19 @@ class BD:
                                      M.ID_USER_DESTINO = ?''', [user_id]).fetchall()
         self.disconnect()
         return result
+    
+    def get_group_message(self, id_group):
+        self.connect()
+        result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME
+                                     FROM MENSAGEM_GRUPO M
+                                     LEFT OUTER JOIN USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER
+                                     LEFT OUTER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO_DESTINO
+                                     WHERE M.ID_GRUPO_DESTINO = ?''', [id_group]).fetchall()
+        self.disconnect()
+        return result
+    
+    def verify_all_groups(self, id_user):
+        return self.select("PARTICIPA_DE", ["ID_GRUPO"], "ID_USER = ?", [id_user])
+    
+    def get_qnt_message_group(self, id_group):
+        return self.select("MENSAGEM_GRUPO", ["COUNT(*)"], "ID_GRUPO_DESTINO = ?", [id_group])[0][0]
