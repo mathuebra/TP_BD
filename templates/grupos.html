@@ -1,60 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='show_group_message.css') }}">
-    <title>Group Messages</title>
 </head>
 <body>
+    <h1>Página Grupos</h1>
+    
     <div class="container">
+        <!-- Sidebar para listar as conversas -->
         <div class="sidebar">
+            <!-- Botão de filtro -->
             <h2>Grupos</h2>
             <ul id="group-list">
+                <!-- Loop para gerar a lista de conversas -->
                 {% for grupo in grupo_active %}
                     <li onclick="showMessages('{{ grupo.group_id }}', '{{ grupo.group_name }}')">{{ grupo.group_name }}</li>
                 {% endfor %}
             </ul>
         </div>
+
+        <!-- Area do chat principal -->
         <div class="chat">
-            <div id="chat-header"></div>
-                <!--<h2 id="recipient-name"></h2>-->
+            <!-- Cabeçalho para exibir o nome do usuário -->
+            <div id="chat-header">
+                <h2 id="recipient-name"></h2>
             </div>
+            <!-- Janela de chat onde as mensagens serão exibidas -->
             <div id="chat-window">
                 <p>Selecione um grupo para ver as mensagens.</p>
             </div>
-            <form id="message-form">
-                <div class="form-controls">
-                    <textarea id="message-input" placeholder="Digite sua mensagem..."></textarea>
-                    <button type="submit">Enviar</button>
-                </div>
-            </form>
+
+            <!-- Barra de envio de mensagem -->
+            <div id="message-form">
+                <form onsubmit="sendMessage(event)">
+                    <input type="hidden" id="current-recipient-id">
+                    <div class="form-controls">
+                        <textarea id="message-input" rows="3" placeholder="Digite sua mensagem..."></textarea>
+                        <button type="submit">Enviar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-
+        // Converte a variável do template para um objeto JS
         const grupo_active = {{ grupo_active|tojson|safe }};
-
-        // Função para exibir mensagens do grupo
-        /*function displayMessages(messages) {
-            const chatWindow = document.getElementById('chat-window');
-            chatWindow.innerHTML = '';
-
-            messages.forEach(msg => {
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('message', msg.user_name === 'Matheus' ? 'sent-message' : 'recipient-message');
-                messageElement.innerHTML = `
-                    <strong>${msg.user_name}</strong>
-                    <p>${msg.message}</p>
-                    <span class="message-date">${msg.date}</span>
-                `;
-                chatWindow.appendChild(messageElement);
-            });
-        }*/
-
-        // Exibir mensagens ao carregar a página
-        //displayMessages(groupMessages);
+        
         // Função para criar um elemento de mensagem
         function createMessageElement(text, date, isSent) {
             const messageElement = document.createElement('div');
@@ -75,7 +70,7 @@
         }
 
         // Função para exibir mensagens na janela de chat
-        function showMessages(userId, userName) {
+        function showMessages(grupoId, grupoName) {
             const chatWindow = document.getElementById('chat-window');
             const messageForm = document.getElementById('message-form');
             // Mostra o nome da conversa
@@ -89,11 +84,11 @@
             messageForm.style.display = 'none';
 
             // Encontra a conversa correspondente ao usuário selecionado
-            const userConversa = grupo_active.find(conversa => grupo_active.group_id == userId);
+            const userConversa = grupo_active.find(conversa => grupo_active.group_id == grupoId);
             if (userConversa) {
                 // Itera sobre cada mensagem na conversa
                 userConversa.conversas.forEach(msg => {
-                    const [messageText, messageDate, senderId, senderName] = msg;
+                    const [messageText, messageDate, senderId] = msg;
                     // Verifica se a mensagem foi enviada pelo usuário atual
                     const isSent = senderId == '{{ session.user_id }}';
 
@@ -117,15 +112,7 @@
             // Atualiza o campo oculto com o id do destinatário
             document.getElementById('current-recipient-id').value = userId;
         }
-       /*function showMessages(grupoId) {
-            const chatWindow = document.getElementById('chat-window');
-            const messageForm = document.getElementById('message-form');
-            // Mostra o nome da conversa
-            const recipientName = document.getElementById('recipient-name');
-        */
 
-            
-       
     </script>
 </body>
 </html>

@@ -167,30 +167,24 @@ def show_group_message():
         user_id = session['user_id'] # Pega o id do usuário logado
         grupo_active = []
         grupo_active_temp = []
-        grupo_message = []
+
+        i = 0
 
         for each in db.verify_all_groups(user_id):
             grupo_active.append({
                 'group_id': each[0], 
-                'group_name' : db.get_grupo_name(each[0])
+                'group_name' : db.get_grupo_name(each[0]),
+                'conversas' : []
             })
 
         for each in db.verify_all_groups(user_id):
             grupo_active_temp.append(each[0])
 
-        for current in grupo_active_temp:
-            grupo_total_conversas = db.get_group_message(current)
-            qnt_msg_grupo = db.get_qnt_message_group(current)
-            for actual in range(qnt_msg_grupo):
-                grupo_message.append({
-                    'group_id': current,
-                    'group_name': grupo_total_conversas[actual][2],
-                    'user_name': grupo_total_conversas[actual][3],
-                    'message': grupo_total_conversas[actual][0],
-                    'date': grupo_total_conversas[actual][1]
-                })
+        for each in grupo_active_temp:
+            grupo_active[i]['conversas'] = db.get_group_message(each)
+            i += 1
 
-        return render_template('show_group_message.html', grupo_active=grupo_active, grupo_message=grupo_message)
+        return render_template('grupos.html', grupo_active=grupo_active)
 
 if __name__ == '__main__':
     app.run(debug=True)

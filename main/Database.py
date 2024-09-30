@@ -3,7 +3,7 @@ import os
 import datetime
 
 class BD:
-    database = "/home/mathuebra/VS/TP_BD/db" # Caminho do banco de dados local
+    database = "/home/mathuebra/VS/TP_BD/bancoDeDados" # Caminho do banco de dados local
     conn = None
     cursor = None
     connected = False
@@ -156,7 +156,7 @@ class BD:
     
     def get_group_message(self, id_group):
         self.connect()
-        result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, G.NOME_GRUPO, U.NOME
+        result = self.cursor.execute(f'''SELECT M.CONTEUDO, M.DATA_ENVIO, U.NOME, U.ID_USER
                                      FROM MENSAGEM_GRUPO M
                                      LEFT OUTER JOIN USUARIO U ON M.ID_USER_ORIGEM = U.ID_USER
                                      LEFT OUTER JOIN GRUPO G ON G.ID_GRUPO = M.ID_GRUPO_DESTINO
